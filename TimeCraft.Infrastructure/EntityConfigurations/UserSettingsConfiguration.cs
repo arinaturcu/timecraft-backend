@@ -9,33 +9,32 @@ namespace TimeCraft.Infrastructure.EntityConfigurations;
 /// for some specifics such as unique keys, indexes and foreign keys it is better to explicitly specify them.
 /// Note that the EntityTypeBuilder implements a Fluent interface, meaning it is a highly declarative interface using method-chaining.
 /// </summary>
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public class UserSettingsConfiguration : IEntityTypeConfiguration<UserSettings>
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<UserSettings> builder)
     {
         builder.Property(e => e.Id) // This specifies which property is configured.
             .IsRequired(); // Here it is specified if the property is required, meaning it cannot be null in the database.
         builder.HasKey(x => x.Id); // Here it is specifies that the property Id is the primary key.
-        builder.Property(e => e.Name)
+        builder.Property(e => e.DateFormat)
             .HasMaxLength(255) // This specifies the maximum length for varchar type in the database.
             .IsRequired();
-        builder.Property(e => e.Email)
+        builder.Property(e => e.TimeFormat)
             .HasMaxLength(255)
             .IsRequired();
-        builder.HasAlternateKey(e => e.Email); // Here it is specifies that the property Email is a unique key.
-        builder.Property(e => e.Password)
+        builder.Property(e => e.TimeZone)
             .HasMaxLength(255)
             .IsRequired();
-        builder.Property(e => e.Role)
+        builder.Property(e => e.Theme)
             .HasMaxLength(255)
             .IsRequired();
         builder.Property(e => e.CreatedAt)
             .IsRequired();
         builder.Property(e => e.UpdatedAt)
             .IsRequired();
-
-        builder.HasOne(e => e.UserSettings)
-            .WithOne(e => e.User)
+        
+        builder.HasOne(e => e.User)
+            .WithOne(e => e.UserSettings)
             .HasForeignKey<UserSettings>(e => e.UserId);
     }
 }
