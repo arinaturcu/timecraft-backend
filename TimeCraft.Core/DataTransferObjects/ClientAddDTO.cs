@@ -1,5 +1,3 @@
-using TimeCraft.Core.Enums;
-
 namespace TimeCraft.Core.DataTransferObjects;
 
 public class ClientAddDTO
