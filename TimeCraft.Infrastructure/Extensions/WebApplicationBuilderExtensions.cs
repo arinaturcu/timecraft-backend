@@ -170,8 +170,8 @@ public static class WebApplicationBuilderExtensions
         builder.Services.Configure<MailConfiguration>(builder.Configuration.GetSection(nameof(MailConfiguration)));
         builder.Services
             .AddTransient<IUserService, UserService>()
+            .AddTransient<IUserSettingsService, UserSettingsService>()
             .AddTransient<ILoginService, LoginService>()
-            .AddTransient<IFileRepository, FileRepository>()
             .AddTransient<IMailService, MailService>();
 
         return builder;
