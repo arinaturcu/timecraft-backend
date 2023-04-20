@@ -8,6 +8,7 @@ public interface ITimeEntryService
 {
     public Task<ServiceResponse<TimeEntryDTO>> GetTimeEntry(Guid id, CancellationToken cancellationToken = default);
 
+    public Task<ServiceResponse<TimeEntryDurationDTO>> GetDurationById(Guid id, CancellationToken cancellationToken = default);
     public Task<ServiceResponse<PagedResponse<TimeEntryDTO>>> GetTimeEntries(PaginationSearchQueryParams pagination, CancellationToken cancellationToken = default);
 
     public Task<ServiceResponse<TimeEntryDTO>> AddTimeEntry(TimeEntryAddDTO timeEntry, UserDTO? requestingUser, CancellationToken cancellationToken = default);

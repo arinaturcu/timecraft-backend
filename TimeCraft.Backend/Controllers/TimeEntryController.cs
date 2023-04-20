@@ -30,6 +30,17 @@ public class TimeEntryController : AuthorizedController
             this.FromServiceResponse( await _timeEntryService.GetTimeEntry(id)) :
             this.ErrorMessageResult<TimeEntryDTO>(currentUser.Error);
     }
+    
+    [Authorize]
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<RequestResponse<TimeEntryDurationDTO>>> GetDurationById([FromRoute] Guid id)
+    {
+        var currentUser = await GetCurrentUser();
+
+        return currentUser.Result != null ?
+            this.FromServiceResponse( await _timeEntryService.GetDurationById(id)) :
+            this.ErrorMessageResult<TimeEntryDurationDTO>(currentUser.Error);
+    }
 
     [Authorize]
     [HttpGet]

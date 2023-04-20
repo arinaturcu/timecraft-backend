@@ -29,6 +29,22 @@ public class TimeEntryService : ITimeEntryService
             ServiceResponse<TimeEntryDTO>.FromError(CommonErrors.TimeEntryNotFound);
     }
 
+    public async Task<ServiceResponse<TimeEntryDurationDTO>> GetDurationById(Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await _repository.GetAsync(new TimeEntryProjectionSpec(id), cancellationToken);
+
+        if (result == null)
+        {
+            return ServiceResponse<TimeEntryDurationDTO>.FromError(CommonErrors.TimeEntryNotFound);
+        }
+
+        return ServiceResponse<TimeEntryDurationDTO>.ForSuccess(new TimeEntryDurationDTO
+        {
+            Duration = result.EndTime - result.StartTime
+        });
+    }
+
     public async Task<ServiceResponse<PagedResponse<TimeEntryDTO>>> GetTimeEntries(PaginationSearchQueryParams pagination,
         CancellationToken cancellationToken = default)
     {
@@ -92,6 +108,9 @@ public class TimeEntryService : ITimeEntryService
 
         entity.Name = timeEntry.Name;
         entity.Description = timeEntry.Description;
+        entity.StartTime = timeEntry.StartTime;
+        entity.EndTime = timeEntry.EndTime;
+        entity.SubtaskId = timeEntry.SubtaskId;
 
         await _repository.UpdateAsync(entity, cancellationToken);
 
