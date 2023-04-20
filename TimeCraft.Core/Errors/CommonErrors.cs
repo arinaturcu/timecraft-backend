@@ -11,5 +11,6 @@ public static class CommonErrors
     public static ErrorMessage UserSettingsNotFound => new(HttpStatusCode.NotFound, "User settings not found!", ErrorCodes.EntityNotFound);
     public static ErrorMessage ClientNotFound => new(HttpStatusCode.NotFound, "Client doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage ProjectNotFound => new(HttpStatusCode.NotFound, "Project doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage SubtaskNotFound => new(HttpStatusCode.NotFound, "Subtask doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage TechnicalSupport => new(HttpStatusCode.InternalServerError, "An unknown error occurred, contact the technical support!", ErrorCodes.TechnicalError);
 }

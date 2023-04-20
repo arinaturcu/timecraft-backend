@@ -11,7 +11,6 @@ public enum ErrorCodes
     Unknown,
     TechnicalError,
     EntityNotFound,
-    PhysicalFileNotFound,
     UserAlreadyExists,
     WrongPassword,
     CannotAdd,
