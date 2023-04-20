@@ -12,5 +12,6 @@ public static class CommonErrors
     public static ErrorMessage ClientNotFound => new(HttpStatusCode.NotFound, "Client doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage ProjectNotFound => new(HttpStatusCode.NotFound, "Project doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage SubtaskNotFound => new(HttpStatusCode.NotFound, "Subtask doesn't exist!", ErrorCodes.EntityNotFound);
+    public static ErrorMessage TimeEntryNotFound => new(HttpStatusCode.NotFound, "Time entry doesn't exist!", ErrorCodes.EntityNotFound);
     public static ErrorMessage TechnicalSupport => new(HttpStatusCode.InternalServerError, "An unknown error occurred, contact the technical support!", ErrorCodes.TechnicalError);
 }

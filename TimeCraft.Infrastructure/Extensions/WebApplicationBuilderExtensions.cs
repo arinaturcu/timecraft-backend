@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
+using TimeCraft.Core.Entities;
 using TimeCraft.Infrastructure.Configurations;
 using TimeCraft.Infrastructure.Converters;
 using TimeCraft.Infrastructure.Database;
@@ -174,6 +175,7 @@ public static class WebApplicationBuilderExtensions
             .AddTransient<IUserSettingsService, UserSettingsService>()
             .AddTransient<IProjetcService, ProjectService>()
             .AddTransient<ISubtaskService, SubtaskService>()
+            .AddTransient<ITimeEntryService, TimeEntryService>()
             .AddTransient<ILoginService, LoginService>()
             .AddTransient<IMailService, MailService>();
 
