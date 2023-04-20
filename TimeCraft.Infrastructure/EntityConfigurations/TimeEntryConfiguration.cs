@@ -16,7 +16,7 @@ public class TimeEntryConfiguration : IEntityTypeConfiguration<TimeEntry>
         builder.HasKey(x => x.Id);
         builder.Property(e => e.Name)
             .HasMaxLength(255)
-            .IsRequired();
+            .IsRequired(false);
         builder.Property(e => e.Description)
             .HasMaxLength(4095)
             .IsRequired(false); // This specifies that this column can be null in the database.
