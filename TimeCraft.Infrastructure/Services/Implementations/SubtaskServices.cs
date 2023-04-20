@@ -45,6 +45,12 @@ public class SubtaskService : ISubtaskService
             return ServiceResponse<SubtaskDTO>.FromError(new(HttpStatusCode.Forbidden, "Not authorized.", ErrorCodes.CannotAdd));
         }
 
+        var project = await _repository.GetAsync(new ProjectSpec(subtask.ProjectId), cancellationToken);
+        if (project == null)
+        {
+            return ServiceResponse<SubtaskDTO>.FromError(new(HttpStatusCode.BadRequest, "Project does not exist.", ErrorCodes.CannotAdd));
+        }
+
         var result = await _repository.GetAsync(new SubtaskSpec(subtask.Name), cancellationToken);
 
         if (result != null)

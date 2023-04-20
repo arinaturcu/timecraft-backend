@@ -60,12 +60,11 @@ public class TimeEntryService : ITimeEntryService
         {
             return ServiceResponse<TimeEntryDTO>.FromError(new(HttpStatusCode.Forbidden, "Not authorized.", ErrorCodes.CannotAdd));
         }
-
-        var result = await _repository.GetAsync(new TimeEntrySpec(timeEntry.Name), cancellationToken);
-
-        if (result != null)
+        
+        var subtask = await _repository.GetAsync(new SubtaskSpec(timeEntry.SubtaskId), cancellationToken);
+        if (subtask == null)
         {
-            return ServiceResponse<TimeEntryDTO>.FromError(new(HttpStatusCode.BadRequest, "Time Entry already exists.", ErrorCodes.CannotAdd));
+            return ServiceResponse<TimeEntryDTO>.FromError(new(HttpStatusCode.BadRequest, "Subtask does not exist.", ErrorCodes.CannotAdd));
         }
 
         var newTimeEntry = new TimeEntry

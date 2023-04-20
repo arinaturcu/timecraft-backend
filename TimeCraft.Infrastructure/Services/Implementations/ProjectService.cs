@@ -44,6 +44,12 @@ public class ProjectService : IProjetcService
         {
             return ServiceResponse<ProjectDTO>.FromError(new(HttpStatusCode.Forbidden, "Not authorized.", ErrorCodes.CannotAdd));
         }
+        
+        var client = await _repository.GetAsync(new ClientSpec(project.ClientId), cancellationToken);
+        if (client == null)
+        {
+            return ServiceResponse<ProjectDTO>.FromError(new(HttpStatusCode.BadRequest, "Client does not exist.", ErrorCodes.CannotAdd));
+        }
 
         var result = await _repository.GetAsync(new ProjectSpec(project.Name), cancellationToken);
 

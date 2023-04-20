@@ -18,10 +18,6 @@ public sealed class TimeEntryProjectionSpec : BaseSpec<TimeEntryProjectionSpec, 
         SubtaskId = e.SubtaskId
     };
 
-    public TimeEntryProjectionSpec(bool orderByCreatedAt = true) : base(orderByCreatedAt)
-    {
-    }
-
     public TimeEntryProjectionSpec(Guid id) : base(id)
     {
     }
